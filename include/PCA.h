@@ -4,16 +4,13 @@
  * Jan 2013
  */
 
-#pragma once
 #ifndef RLEARNING_PCA_H
 #define RLEARNING_PCA_H
 
 #include <opencv2/opencv.hpp>
 #include <vector>
-using std::vector;
 #include <boost/foreach.hpp>
 #include <iostream>
-using std::ostream;
 
 
 namespace RLearning
@@ -24,17 +21,17 @@ namespace RLearning
 // Each of the provided matrices inside the given vector must have the
 // same number of dimensions! Returned matrix is type CV_32FC1 and is
 // suitable for use in PCA and related functions (below).
-cv::Mat flattenToColumnVectors( const vector<cv::Mat> &data);
+cv::Mat flattenToColumnVectors( const std::vector<cv::Mat> &data);
 
 // Separate the rows of rowVecs into individual cv::Mat instances in parameter vs.
-void separateRowVectors( const cv::Mat &rowVecs, vector<cv::Mat> &vs);
+void separateRowVectors( const cv::Mat &rowVecs, std::vector<cv::Mat> &vs);
 
-cv::Mat calcMedian( const vector<cv::Mat> &data);
+cv::Mat calcMedian( const std::vector<cv::Mat> &data);
 
 // Calculate the means of the provided data (data dimensions must be the same).
 // Returned matrix is CV_32FC(N) where N is the number of channels in each of
 // the data matrices. The returned matrix has the same dimensions as the data.
-cv::Mat calcMeans( const vector<cv::Mat> &data);
+cv::Mat calcMeans( const std::vector<cv::Mat> &data);
 
 // Calculate the means from a bunch of multi-dimensional data points stored
 // as column vectors in the given matrix. Number of data dimensions is found
@@ -48,29 +45,29 @@ cv::Mat calcMeans( const cv::Mat &colVecs);
 // Parameter sampleBias (default true) scales the covariance matrix by 1/(M-1)
 // with M data points if true and scales with 1/M otherwise.
 // If parameter means is not provided, the means are calculated.
-cv::Mat calcCovariance( const vector<cv::Mat> &data,
+cv::Mat calcCovariance( const std::vector<cv::Mat> &data,
         bool sampleBias=true, cv::Mat means=cv::Mat());
 
 cv::Mat calcCovariance( const cv::Mat &colVecs,
         bool sampleBias=true, cv::Mat means=cv::Mat());
 
 // Print the given matrix.
-void printMatrix( const cv::Mat &m, ostream &os);
+void printMatrix( const cv::Mat &m, std::ostream &os);
 
 // Print a bunch of vectors (stored as columns in m)
 // Vectors are printed in rows to save space.
-void printColumnVectors( const cv::Mat &m, ostream &os);
+void printColumnVectors( const cv::Mat &m, std::ostream &os);
 
 // Write a bunch of data points to an output stream - one row per data point.
 // Allows for multiple dimensions (each dimension value separated by a space).
 // Default point ordering is as column vectors in the given matrix.
-void writePoints( ostream &os, const cv::Mat_<float> &data, bool inColOrder=true);
+void writePoints( std::ostream &os, const cv::Mat_<float> &data, bool inColOrder=true);
 
 
 class PCA
 {
 public:
-    PCA( const vector<cv::Mat> &data, bool useSampleBias=true);
+    PCA( const std::vector<cv::Mat> &data, bool useSampleBias=true);
     PCA( const cv::Mat &colData, bool useSampleBias=true);
 
     cv::Mat getMeans();

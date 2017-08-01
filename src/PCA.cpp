@@ -1,5 +1,7 @@
 #include "PCA.h"
 #include <cassert>
+using std::vector;
+using std::ostream;
 
 
 cv::Mat RLearning::flattenToColumnVectors( const vector<cv::Mat> &data)
