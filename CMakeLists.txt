@@ -1,8 +1,9 @@
-cmake_minimum_required(VERSION 2.8.11 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
+
 project( rLearning)
 
 set(WITH_RFEATURES TRUE)
-include( "cmake/LibCommon.cmake")
+include( "cmake/FindLibs.cmake")
 
 set( INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
 set( SRC_DIR "${PROJECT_SOURCE_DIR}/src")
@@ -88,4 +89,4 @@ set( SRC_FILES
 	)
 
 add_library( ${PROJECT_NAME} ${SRC_FILES} ${INCLUDE_FILES})
-include( "cmake/LibInstall.cmake")
+include( "cmake/LinkLibs.cmake")
